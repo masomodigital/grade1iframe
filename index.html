@@ -42,6 +42,7 @@
 
             const validPassword = "23406631"; // Common password
 
+            // Check the password
             if (password !== validPassword) {
                 document.getElementById("message").innerText = "Invalid password. Please try again.";
                 return;
@@ -56,7 +57,9 @@
                 const usernames = data.files["Usernames.json"].content;
                 const users = JSON.parse(usernames);
 
+                // Check if the email exists in the Gist
                 if (users[email]) {
+                    localStorage.setItem('isLoggedIn', 'true'); // Set the logged-in state
                     window.location.href = "https://sites.google.com/view/grades-1/home"; // Redirect URL
                 } else {
                     document.getElementById("message").innerText = "Email not found. Please try again.";
