@@ -3,26 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grade 1 Home</title>
+    <title>Login</title>
     <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            width: 100%;
+        body {
+            font-family: Arial, sans-serif;
             display: flex;
-            justify-content: center;
+            flex-direction: column;
             align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
         }
-
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
+        input {
+            margin: 10px 0;
+            padding: 10px;
+            width: 200px;
+        }
+        button {
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .message {
+            color: red;
         }
     </style>
 </head>
 <body>
-    <iframe src="https://sites.google.com/view/grades-1/home" title="Grade 1 Home"></iframe>
+    <h2>Login</h2>
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Password" required>
+    <button onclick="login()">Login</button>
+    <div class="message" id="message"></div>
+
+    <script>
+        async function login() {
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+
+            const validPassword = "23406631"; // Common password
+
+            if (password !== validPassword) {
+                document.getElementById("message").innerText = "Invalid password. Please try again.";
+                return;
+            }
+
+            const gistId = "20ff2259b83385eec529666ee853387f"; // Your Gist ID
+            const url = `https://api.github.com/gists/${gistId}`;
+
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                const usernames = data.files["Usernames.json"].content;
+                const users = JSON.parse(usernames);
+
+                if (users[email]) {
+                    window.location.href = "https://sites.google.com/view/grades-1/home"; // Redirect URL
+                } else {
+                    document.getElementById("message").innerText = "Email not found. Please try again.";
+                }
+            } catch (error) {
+                console.error("Error fetching Gist:", error);
+                document.getElementById("message").innerText = "An error occurred. Please try again later.";
+            }
+        }
+    </script>
 </body>
 </html>
