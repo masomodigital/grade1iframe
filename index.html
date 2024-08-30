@@ -14,6 +14,10 @@
             height: 100vh;
             margin: 0;
         }
+        img {
+            width: 100px; /* Adjust size as needed */
+            margin-bottom: 20px; /* Space between the image and the heading */
+        }
         input {
             margin: 10px 0;
             padding: 10px;
@@ -22,14 +26,23 @@
         button {
             padding: 10px 20px;
             cursor: pointer;
+            background-color: green; /* Green background for the button */
+            color: white; /* White text color */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
         }
         .message {
             color: red;
         }
+        .instruction {
+            margin-bottom: 15px; /* Space below the instruction text */
+        }
     </style>
 </head>
 <body>
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgTmvbQ8PO3QEmNBLuNDGJsOEha8rictP5-rmbG0qYp5qQe3QMEhoogK84OdxPgNB5iwytY-lpQT7E7AY4kpvmMGqK6CUrAHaXXhOj7CjXvKSu71HjYyy9NQ_Oh4CuCC_l97lDW3A9HF2eU670xt5mv83zx2OqCG_Is4zPpdYJ4JUaM14-2AZyEXOBktJE/w92-h84/logo.png" alt="Logo">
     <h2>Login</h2>
+    <p class="instruction">Please enter your correct email address and the password. You will be redirected to access the Grade 1 Library immediately!</p>
     <input type="email" id="email" placeholder="Email" required>
     <input type="password" id="password" placeholder="Password" required>
     <button onclick="login()">Login</button>
