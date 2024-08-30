@@ -41,32 +41,23 @@
             const password = document.getElementById("password").value;
 
             const validPassword = "23406631"; // Common password
-
-            // Check the password
-            if (password !== validPassword) {
-                document.getElementById("message").innerText = "Invalid password. Please try again.";
-                return;
-            }
-
             const gistId = "20ff2259b83385eec529666ee853387f"; // Your Gist ID
             const url = `https://api.github.com/gists/${gistId}`;
 
             try {
                 const response = await fetch(url);
                 const data = await response.json();
-                const usernames = data.files["Usernames.json"].content;
-                const users = JSON.parse(usernames);
+                const users = JSON.parse(data.files["Usernames.json"].content);
 
-                // Check if the email exists in the Gist
-                if (users[email]) {
-                    localStorage.setItem('isLoggedIn', 'true'); // Set the logged-in state
-                    window.location.href = "https://sites.google.com/view/grades-1/home"; // Redirect URL
+                if (users[email] && password === validPassword) { // Check email and password
+                    localStorage.setItem('isLoggedIn', 'true'); // Set login flag
+                    window.location.href = "protected.html"; // Redirect to protected page
                 } else {
-                    document.getElementById("message").innerText = "Email not found. Please try again.";
+                    document.getElementById("message").innerText = "Invalid email or password.";
                 }
             } catch (error) {
                 console.error("Error fetching Gist:", error);
-                document.getElementById("message").innerText = "An error occurred. Please try again later.";
+                document.getElementById("message").innerText = "An error occurred. Please try again.";
             }
         }
     </script>
